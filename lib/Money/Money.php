@@ -297,4 +297,32 @@ class Money
 
         return (int) $units;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getCurrency()->getName() . ' ' . $this->toFloat();
+    }
+
+    /**
+     * @return float
+     */
+    public function toFloat()
+    {
+        return $this->getAmount() / $this->getCurrency()->getSubunits();
+    }
+
+    /**
+     * @param mixed $amount
+     * @param string $currency
+     *
+     * @return Money
+     */
+    public static function fromFloat($amount, $currency)
+    {
+        $currency = new Currency($currency);
+        return new self(floatval($amount) * $currency->getSubunits(), $currency);
+    }
 }

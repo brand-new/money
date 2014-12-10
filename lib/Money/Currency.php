@@ -15,6 +15,9 @@ class Currency
     /** @var string */
     private $name;
 
+    /** @var integer */
+    private $subunits;
+
     /** @var array */
     private static $currencies;
 
@@ -32,6 +35,7 @@ class Currency
             throw new UnknownCurrencyException($name);
         }
         $this->name = $name;
+        $this->subunits = static::$currencies[$name]['subunits'];
     }
 
 
@@ -41,6 +45,14 @@ class Currency
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getSubunits()
+    {
+        return $this->subunits;
     }
 
     /**
