@@ -323,6 +323,6 @@ class Money
     public static function fromFloat($amount, $currency)
     {
         $currency = new Currency($currency);
-        return new self(floatval($amount) * $currency->getSubunits(), $currency);
+        return new self(intval(floatval($amount) * $currency->getSubunits()), $currency);
     }
 }
